@@ -1,0 +1,69 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath(
+                "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+                'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
+        )
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+project.buildDir = 'target'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+project.ext {
+    junit5Version = '5.2.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    testImplementation(
+            'org.springframework.boot:spring-boot-starter-test',
+            "org.junit.jupiter:junit-jupiter-api:${junit5Version}"
+    )
+
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine:${junit5Version}",
+            "org.junit.vintage:junit-vintage-engine:${junit5Version}"
+    )
+}
+
+// run tests all the time: ./gradlew test --rerun-tasks
+// run tests with verbose console: ./gradlew test -i
+test {
+    useJUnitPlatform()
+
+    // better console logging for tests. By default, no console logging when running tests.
+    testLogging {
+        exceptionFormat = 'full'
+
+        events "started", "passed", "skipped", "failed"
+        afterSuite { desc, result ->
+            if (!desc.parent) { // will match outermost suite
+                println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+            }
+        }
+    }
+}
