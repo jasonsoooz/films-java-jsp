@@ -33,11 +33,16 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') {
+        // Jetty is preferred web server over tomcat
         exclude module: 'spring-boot-starter-tomcat'
+        // Exclude jackson as default JSON http message converter
+        exclude group: 'com.fasterxml.jackson.core'
     }
     compile (
             'org.springframework.boot:spring-boot-starter-jetty',
-            'org.apache.commons:commons-lang3:3.7'
+            'org.apache.commons:commons-lang3:3.7',
+            // Use gson as preferred JSON http message converter
+            'com.google.code.gson:gson:2.8.5'
     )
 
     testCompile 'org.assertj:assertj-core:3.9.1'
