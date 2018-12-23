@@ -1,17 +1,32 @@
 package com.example.films;
 
+import com.example.films.adapter.controller.FilmController;
+import com.example.films.port.provides.FilmService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 class FilmsApplicationTests {
 
+	@Autowired
+	private FilmService filmService;
+
+	@Autowired
+	private FilmController filmController;
+
 	@Test
-	@DisplayName("context should load")
-	void contextLoads() {
+	@DisplayName("service should load")
+	void contextServiceLoads() {
+		assertThat(filmService).isNotNull();
+	}
+
+	@Test
+	@DisplayName("controller should load")
+	void contextControllerLoads() {
+		assertThat(filmController).isNotNull();
 	}
 }
