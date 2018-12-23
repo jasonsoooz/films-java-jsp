@@ -26,3 +26,9 @@ Run tests:
 ```
 ./gradlew test
 ```
+
+### To do:
+* Add jsp web pages
+* Add update functionality
+* Disallow adding same film (business key = year, title, director)
+* Add database? (eg mysql)
