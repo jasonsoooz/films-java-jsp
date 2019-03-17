@@ -46,20 +46,23 @@ class FilmControllerTest {
         films.add(new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi"));
         when(filmService.getFilms()).thenReturn(films);
 
-        this.mockMvc.perform(get("/films"))
+        this.mockMvc.perform(get("/films")
+                .contextPath("/films")
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string(containsString(gson.toJson(films))));
     }
 
-    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8015/films
+    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8015/films/
     @Test
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
         FilmDTO film = new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi");
 
-        this.mockMvc.perform(post("/films")
+        this.mockMvc.perform(post("/films/")
+                .contextPath("/films")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
@@ -75,6 +78,7 @@ class FilmControllerTest {
         FilmDTO film = new FilmDTO(2004, "Spiderman 2", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(delete("/films/Spiderman%202")
+                .contextPath("/films")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
