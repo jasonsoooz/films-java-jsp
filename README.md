@@ -19,7 +19,17 @@ Run the app:
 
 Access the app:
 ```
-http://localhost:8015/films
+- Get list of films
+http://localhost:8018/demo/films
+
+- Health check ping app
+http://localhost:8018/demo/ping
+
+- Spring actuator urls
+http://localhost:8015/demo/actuator
+
+- Spring actuator health check
+http://localhost:8015/demo/actuator/health 
 ```
 
 Run tests:

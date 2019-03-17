@@ -14,18 +14,18 @@ public class FilmController {
     @Resource
     private FilmService filmService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/films", method = RequestMethod.GET)
     public List<FilmDTO> getFilms() {
         return filmService.getFilms();
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/films", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addFilm(@RequestBody FilmDTO film) {
         filmService.saveFilm(film);
     }
 
-    @RequestMapping(value = "/{title}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/films/{title}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteFilm(@PathVariable String title, @RequestBody FilmDTO film) {
         filmService.deleteFilm(film);

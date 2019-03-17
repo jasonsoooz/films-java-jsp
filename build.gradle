@@ -40,6 +40,7 @@ dependencies {
     }
     compile (
             'org.springframework.boot:spring-boot-starter-jetty',
+            'org.springframework.boot:spring-boot-starter-actuator',
             'org.apache.commons:commons-lang3:3.7',
             // Use gson as preferred JSON http message converter
             'com.google.code.gson:gson:2.8.5'

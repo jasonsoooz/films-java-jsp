@@ -19,9 +19,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,23 +44,20 @@ class FilmControllerTest {
         films.add(new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi"));
         when(filmService.getFilms()).thenReturn(films);
 
-        this.mockMvc.perform(get("/films")
-                .contextPath("/films")
-        )
+        this.mockMvc.perform(get("/films"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string(containsString(gson.toJson(films))));
     }
 
-    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8015/films/
+    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8018/demo/films
     @Test
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
         FilmDTO film = new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(post("/films/")
-                .contextPath("/films")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
@@ -72,13 +67,12 @@ class FilmControllerTest {
         verify(filmService).saveFilm(film);
     }
 
-    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X DELETE http://localhost:8015/films/Spiderman%202
+    // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X DELETE http://localhost:8018/demo/films/Spiderman%202
     @Test
     void shouldDeleteFilm() throws Exception {
         FilmDTO film = new FilmDTO(2004, "Spiderman 2", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(delete("/films/Spiderman%202")
-                .contextPath("/films")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
