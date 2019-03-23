@@ -24,6 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Not needed in JSP web app, but retained as example of rest controller & controller tests
+ */
+
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
 class FilmControllerTest {
@@ -44,7 +48,7 @@ class FilmControllerTest {
         films.add(new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi"));
         when(filmService.getFilms()).thenReturn(films);
 
-        this.mockMvc.perform(get("/films"))
+        this.mockMvc.perform(get("/films2"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -57,7 +61,7 @@ class FilmControllerTest {
     void shouldAddFilm() throws Exception {
         FilmDTO film = new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi");
 
-        this.mockMvc.perform(post("/films/")
+        this.mockMvc.perform(post("/films2/")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
@@ -72,7 +76,7 @@ class FilmControllerTest {
     void shouldDeleteFilm() throws Exception {
         FilmDTO film = new FilmDTO(2004, "Spiderman 2", 7.3f, "Sam Raimi");
 
-        this.mockMvc.perform(delete("/films/Spiderman%202")
+        this.mockMvc.perform(delete("/films2/Spiderman%202")
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
