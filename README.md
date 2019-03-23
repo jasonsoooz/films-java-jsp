@@ -38,9 +38,8 @@ Run tests:
 ```
 
 ### To do:
-* Make 8018 port https
-* Improve actuator health check (eg add ping response, etc)
 * Add jsp web pages & selenium web tests
+* Improve actuator health check (eg add ping response, etc)
 * Add update functionality
 * Disallow adding same film (business key = year, title, director)
 * Add database? (eg mysql)
