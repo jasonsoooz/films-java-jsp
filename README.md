@@ -20,10 +20,10 @@ Run the app:
 Access the app:
 ```
 - Get list of films
-http://localhost:8018/demo/films
+https://localhost:8018/demo/films
 
 - Health check ping app
-http://localhost:8018/demo/ping
+https://localhost:8018/demo/ping
 
 - Spring actuator urls
 http://localhost:8015/demo/actuator
@@ -39,6 +39,7 @@ Run tests:
 
 ### To do:
 * Add jsp web pages & selenium web tests
+* fix SpringBootTest disabled tests failing with PKIX ssl errors
 * Improve actuator health check (eg add ping response, etc)
 * Add update functionality
 * Disallow adding same film (business key = year, title, director)
