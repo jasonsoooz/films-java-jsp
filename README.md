@@ -38,9 +38,12 @@ Run tests:
 ```
 
 ### To do:
-* Add jsp web pages & selenium web tests
+* JSP web pages
+  * Add styling to web pages
+  * Add delete / update functionality
+  * Add spring mvc validation errors
+* Add selenium web tests
 * fix SpringBootTest disabled tests failing with PKIX ssl errors
 * Improve actuator health check (eg add ping response, etc)
-* Add update functionality
 * Disallow adding same film (business key = year, title, director)
 * Add database? (eg mysql)

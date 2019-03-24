@@ -12,10 +12,44 @@ public class FilmDTO {
     private float imdbRating;
     private String director;
 
+    public FilmDTO() {}
+
     public FilmDTO(int year, String title, float imdbRating, String director) {
         this.year = year;
         this.title = title;
         this.imdbRating = imdbRating;
+        this.director = director;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public float getImdbRating() {
+        return imdbRating;
+    }
+
+    public void setImdbRating(float imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
         this.director = director;
     }
 
