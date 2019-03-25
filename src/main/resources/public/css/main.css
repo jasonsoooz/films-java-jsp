@@ -1,0 +1,24 @@
+h1 {
+  color: white;
+  background-color: green;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: green;
+  color: white;
+}
+tr.notform:nth-child(even) {
+  background-color: #f2f2f2
+}
+input:not([type="submit"]) {
+  width: 100%;
+}
+
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

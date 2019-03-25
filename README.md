@@ -39,7 +39,6 @@ Run tests:
 
 ### To do:
 * JSP web pages
-  * Add styling to web pages
   * Add delete / update functionality
   * Add spring mvc validation errors
 * Add selenium web tests

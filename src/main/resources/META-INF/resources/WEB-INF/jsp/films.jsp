@@ -4,11 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" href="css/main.css" rel="stylesheet" />
 </head>
 <body>
     <h1>Spring Boot JSP Films</h1>
     <button onclick="location.href = 'film';">Add film</button>
-    <table style="width:100%">
+    <table>
       <tr>
         <th>No</th>
         <th>Film</th>
@@ -16,9 +17,9 @@
         <th>Imdb rating</th>
         <th>Director</th>
       </tr>
-      <c:forEach var="film" items="${films}">
-        <tr>
-          <td>No</td>
+      <c:forEach var="film" items="${films}" varStatus="count">
+        <tr class="notform">
+          <td>${count.count}</td>
           <td>${film.title}</td>
           <td>${film.year}</td>
           <td>${film.imdbRating}</td>

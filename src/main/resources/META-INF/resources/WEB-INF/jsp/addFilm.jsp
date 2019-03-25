@@ -4,11 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" href="css/main.css" rel="stylesheet" />
 </head>
 <body>
     <h1>Spring Boot JSP Add Film</h1>
     <form:form method="post" action="films" modelAttribute="film">
-     <table style="width:100%">
+     <table>
         <tr>
             <td><form:label path="title">Film</form:label></td>
             <td><input type="text" name="title" value="${film.title}" /></td>
