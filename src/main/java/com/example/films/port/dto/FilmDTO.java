@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 public class FilmDTO {
+    private int id;
     private int year;
     private String title;
     private float imdbRating;
@@ -14,11 +15,20 @@ public class FilmDTO {
 
     public FilmDTO() {}
 
-    public FilmDTO(int year, String title, float imdbRating, String director) {
+    public FilmDTO(int id, int year, String title, float imdbRating, String director) {
+        this.id = id;
         this.year = year;
         this.title = title;
         this.imdbRating = imdbRating;
         this.director = director;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getYear() {

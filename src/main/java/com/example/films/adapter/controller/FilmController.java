@@ -29,9 +29,9 @@ public class FilmController {
         filmService.saveFilm(film);
     }
 
-    @RequestMapping(value = "/films2/{title}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/films2/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteFilm(@PathVariable String title, @RequestBody FilmDTO film) {
-        filmService.deleteFilm(film);
+    public void deleteFilm(@PathVariable Long id) {
+        filmService.deleteFilm(id.intValue());
     }
 }

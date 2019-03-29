@@ -5,9 +5,7 @@ import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,6 +32,12 @@ public class WebController {
     @RequestMapping(value = "/films", method = RequestMethod.POST)
     public String addFilm(@ModelAttribute FilmDTO film) {
         filmService.saveFilm(film);
-        return "redirect:films";
+        return "redirect:/films";
+    }
+
+    @RequestMapping(value = "/films/{id}", method = RequestMethod.POST)
+    public String deleteFilm(@PathVariable("id") Long id) {
+        filmService.deleteFilm(id.intValue());
+        return "redirect:/films";
     }
 }

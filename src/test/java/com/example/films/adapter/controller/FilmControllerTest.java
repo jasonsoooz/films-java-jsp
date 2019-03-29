@@ -45,7 +45,7 @@ class FilmControllerTest {
     @DisplayName("should get films")
     void shouldGetFilms() throws Exception {
         List<FilmDTO> films = new ArrayList<>();
-        films.add(new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi"));
+        films.add(new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi"));
         when(filmService.getFilms()).thenReturn(films);
 
         this.mockMvc.perform(get("/films2"))
@@ -59,7 +59,7 @@ class FilmControllerTest {
     @Test
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
-        FilmDTO film = new FilmDTO(2002, "Spiderman", 7.3f, "Sam Raimi");
+        FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(post("/films2/")
                 .content(gson.toJson(film))
@@ -74,15 +74,16 @@ class FilmControllerTest {
     // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X DELETE http://localhost:8018/demo/films/Spiderman%202
     @Test
     void shouldDeleteFilm() throws Exception {
-        FilmDTO film = new FilmDTO(2004, "Spiderman 2", 7.3f, "Sam Raimi");
+        int filmId = 1;
+        FilmDTO film = new FilmDTO(filmId,2004, "Spiderman 2", 7.3f, "Sam Raimi");
 
-        this.mockMvc.perform(delete("/films2/Spiderman%202")
+        this.mockMvc.perform(delete("/films2/" + filmId)
                 .content(gson.toJson(film))
                 .contentType(MediaType.APPLICATION_JSON)
         )
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        verify(filmService).deleteFilm(film);
+        verify(filmService).deleteFilm(filmId);
     }
 }

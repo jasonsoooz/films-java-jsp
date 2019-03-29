@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link type="text/css" href="css/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/mySubmit.js"></script>
 </head>
 <body>
     <h1>Spring Boot JSP Films</h1>
@@ -16,14 +17,16 @@
         <th>Year</th>
         <th>Imdb rating</th>
         <th>Director</th>
+        <th>Action</th>
       </tr>
-      <c:forEach var="film" items="${films}" varStatus="count">
+      <c:forEach var="film" items="${films}">
         <tr class="notform">
-          <td>${count.count}</td>
+          <td>${film.id}</td>
           <td>${film.title}</td>
           <td>${film.year}</td>
           <td>${film.imdbRating}</td>
           <td>${film.director}</td>
+          <td><button onclick="mySubmit('https://localhost:8018/demo/films/${film.id}', 'post')" class="danger">Delete</button></td>
         </tr>
       </c:forEach>
     </table>
