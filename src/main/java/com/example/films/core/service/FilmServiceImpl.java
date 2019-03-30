@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -25,8 +26,19 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void saveFilm(FilmDTO filmDTO) {
-        filmDTO.setId(getNextId(filmDTO.getId()));
-        films.add(filmDTO);
+        // copy element so changes of element don't affect list
+        FilmDTO copy = FilmDTO.of(filmDTO);
+
+        int index = findIndex(copy.getId());
+        // not found
+        if (index == -1) {
+            // add
+            copy.setId(getNextId(copy.getId()));
+            films.add(copy);
+        } else {
+            // update
+            films.set(index, copy);
+        }
     }
 
     @Override
@@ -39,12 +51,20 @@ public class FilmServiceImpl implements FilmService {
         films.clear();
     }
 
-    private FilmDTO find(int id) {
+    @Override
+    public FilmDTO find(int id) {
         return films.stream().filter(film -> film.getId() == id)
                 .findFirst()
                 .<IllegalArgumentException>orElseThrow(() -> {
                     throw new IllegalArgumentException(format("film id: %s not found", id));
                 });
+    }
+
+    private int findIndex(int id) {
+        List<Integer> ids = films.stream()
+                .map(FilmDTO::getId)
+                .collect(Collectors.toList());
+        return ids.indexOf(id);
     }
 
     private int getNextId(int id) {

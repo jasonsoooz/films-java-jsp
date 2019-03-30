@@ -10,6 +10,7 @@
     <h1>Spring Boot JSP Add Film</h1>
     <form:form method="post" action="films" modelAttribute="film">
      <table>
+        <input type="hidden" name="id" value="${film.id}" />
         <tr>
             <td><form:label path="title">Film</form:label></td>
             <td><input type="text" name="title" value="${film.title}" /></td>

@@ -23,6 +23,14 @@ public class FilmDTO {
         this.director = director;
     }
 
+    public static FilmDTO of(FilmDTO film) {
+        return new FilmDTO(film.getId(),
+                film.getYear(),
+                film.getTitle(),
+                film.getImdbRating(),
+                film.getDirector());
+    }
+
     public int getId() {
         return id;
     }

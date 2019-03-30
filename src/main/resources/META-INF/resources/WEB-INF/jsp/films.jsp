@@ -26,7 +26,10 @@
           <td>${film.year}</td>
           <td>${film.imdbRating}</td>
           <td>${film.director}</td>
-          <td><button onclick="mySubmit('https://localhost:8018/demo/films/${film.id}', 'post')" class="danger">Delete</button></td>
+          <td>
+            <button onclick="location.href = 'films/${film.id}'">Update</button>
+            <button onclick="mySubmit('https://localhost:8018/demo/films/${film.id}', 'post')" class="danger">Delete</button>
+          </td>
         </tr>
       </c:forEach>
     </table>

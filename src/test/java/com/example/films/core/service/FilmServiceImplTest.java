@@ -38,6 +38,25 @@ class FilmServiceImplTest {
     }
 
     @Test
+    @DisplayName("should update film")
+    void shouldUpdateFilm() {
+        FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        filmService.saveFilm(film);
+        assertThat(filmService.getFilms().size()).isEqualTo(1);
+
+        int updatedYear = 2003;
+        String updatedTitle = "Spiderman 2";
+        film.setYear(updatedYear);
+        film.setTitle(updatedTitle);
+        filmService.saveFilm(film);
+
+        assertThat(filmService.getFilms().size()).isEqualTo(1);
+        FilmDTO updatedFilm = filmService.getFilms().get(0);
+        assertThat(updatedFilm.getYear()).isEqualTo(updatedYear);
+        assertThat(updatedFilm.getTitle()).isEqualTo(updatedTitle);
+    }
+
+    @Test
     @DisplayName("should delete film")
     void shouldDeleteFilm() {
         int filmId = 1;

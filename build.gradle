@@ -27,6 +27,13 @@ project.ext {
     junit5Version = '5.2.0'
 }
 
+// To debug: ./gradlew bootrun -Ddebug=true
+tasks.withType(JavaExec) {
+    if (System.getProperty('debug', 'false') == 'true') {
+        jvmArgs '-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5001'
+    }
+}
+
 repositories {
     mavenCentral()
 }

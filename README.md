@@ -39,8 +39,10 @@ Run tests:
 
 ### To do:
 * JSP web pages
-  * Add delete / update functionality
   * Add spring mvc validation errors
+  * Display error when id not found
+  * Add clear button on form (make sure works for update)
+* Replace delete method with delete rest request instead of post
 * Add selenium web tests
 * fix SpringBootTest disabled tests failing with PKIX ssl errors
 * Improve actuator health check (eg add ping response, etc)
