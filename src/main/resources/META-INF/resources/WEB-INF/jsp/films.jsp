@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1>Spring Boot JSP Films</h1>
+    <c:if test="${not empty error}">
+       <div class="errorblock">${error}</div>
+    </c:if>
     <button onclick="location.href = 'film';">Add film</button>
     <table>
       <tr>

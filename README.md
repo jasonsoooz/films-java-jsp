@@ -38,9 +38,9 @@ Run tests:
 ```
 
 ### To do:
-* JSP web pages
-  * Display error when id not found for update / delete
-  * Add clear button on form (make sure works for update)
+* Add login page
+* Add user credentials
+* Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post
 * Add selenium web tests
 * fix SpringBootTest disabled tests failing with PKIX ssl errors

@@ -16,6 +16,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
+import static java.lang.String.format;
+
 @Controller
 public class WebController {
 
@@ -50,7 +52,14 @@ public class WebController {
 
     @RequestMapping(value = "/films/{id}", method = RequestMethod.GET)
     public String updateFilm(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        FilmDTO found = filmService.find(id.intValue());
+        FilmDTO found;
+        try {
+            found = filmService.find(id.intValue());
+        } catch(IllegalArgumentException iex) {
+            String error = format("Update error = %s", iex.getMessage());
+            redirectAttributes.addFlashAttribute("error", error);
+            return "redirect:/films";
+        }
         redirectAttributes.addFlashAttribute("film", found);
         return "redirect:/film";
     }
