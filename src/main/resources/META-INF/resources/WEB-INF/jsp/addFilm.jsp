@@ -28,7 +28,10 @@
             <td><input type="text" name="director" value="${film.director}" /></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Submit"/></td>
+            <td>
+              <input type="submit" value="Submit"/>
+              <button onclick="location.href = 'films'; return false;">Cancel</button>
+            </td>
         </tr>
     </table>
   </form:form>
