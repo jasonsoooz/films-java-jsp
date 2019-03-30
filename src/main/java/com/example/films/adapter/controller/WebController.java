@@ -5,6 +5,7 @@ import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,7 +38,12 @@ public class WebController {
     }
 
     @RequestMapping(value = "/films", method = RequestMethod.POST)
-    public String addFilm(@ModelAttribute FilmDTO film) {
+    public String addFilm(@ModelAttribute("film") @Valid FilmDTO film, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("film", film);
+            return "addFilm";
+        }
+
         filmService.saveFilm(film);
         return "redirect:films";
     }

@@ -4,12 +4,20 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 public class FilmDTO {
     private int id;
+
+    @Min(value = 1, message = "Year must be greater than or equal 1")
     private int year;
+
+    @NotEmpty(message = "Film title must not be empty")
     private String title;
+
     private float imdbRating;
     private String director;
 

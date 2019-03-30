@@ -39,8 +39,7 @@ Run tests:
 
 ### To do:
 * JSP web pages
-  * Add spring mvc validation errors
-  * Display error when id not found
+  * Display error when id not found for update / delete
   * Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post
 * Add selenium web tests

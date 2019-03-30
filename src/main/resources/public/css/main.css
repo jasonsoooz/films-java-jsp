@@ -26,3 +26,14 @@ button.danger {
   color: white;
   background-color: red;
 }
+
+.error {
+	color: red;
+}
+.errorblock {
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid red;
+	padding: 8px;
+	margin: 16px;
+}
