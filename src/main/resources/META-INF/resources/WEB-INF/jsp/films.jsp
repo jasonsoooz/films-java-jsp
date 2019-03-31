@@ -8,6 +8,7 @@
     <script type="text/javascript" src="js/mySubmit.js"></script>
 </head>
 <body>
+    <jsp:include page="logout.jsp" />
     <h1>Spring Boot JSP Films</h1>
     <c:if test="${not empty error}">
        <div class="errorblock">${error}</div>

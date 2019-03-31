@@ -39,8 +39,6 @@ Run tests:
 ```
 
 ### To do:
-* Add login page
-* Add user credentials
 * Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post
 * Add selenium web tests
