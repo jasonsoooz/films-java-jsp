@@ -50,11 +50,13 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-actuator',
             'org.apache.commons:commons-lang3:3.7',
             // Use gson as preferred JSON http message converter
-            'com.google.code.gson:gson:2.8.5'
+            'com.google.code.gson:gson:2.8.5',
+            'org.springframework.boot:spring-boot-starter-security'
     )
 
     testCompile ('org.assertj:assertj-core:3.9.1',
-            'org.apache.httpcomponents:httpclient:4.5.7'
+            'org.apache.httpcomponents:httpclient:4.5.7',
+            'org.springframework.security:spring-security-test'
     )
 
     implementation 'org.springframework.boot:spring-boot-starter'

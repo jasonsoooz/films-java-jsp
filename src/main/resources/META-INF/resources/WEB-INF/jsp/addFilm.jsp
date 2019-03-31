@@ -25,7 +25,6 @@
               <input type="number" name="year" step="1" value="${film.year}" />
               <form:errors path="year" cssClass="error" /><br />
             </td>
-            <td></td>
         </tr>
         <tr>
             <td><form:label path="imdbRating">Imdb Rating</form:label></td>

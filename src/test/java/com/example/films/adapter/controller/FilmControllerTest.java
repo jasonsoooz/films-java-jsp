@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -42,6 +43,7 @@ class FilmControllerTest {
     private Gson gson;
 
     @Test
+    @WithMockUser
     @DisplayName("should get films")
     void shouldGetFilms() throws Exception {
         List<FilmDTO> films = new ArrayList<>();
@@ -57,6 +59,7 @@ class FilmControllerTest {
 
     // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8018/demo/films
     @Test
+    @WithMockUser
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
         FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
@@ -73,6 +76,7 @@ class FilmControllerTest {
 
     // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X DELETE http://localhost:8018/demo/films/Spiderman%202
     @Test
+    @WithMockUser
     void shouldDeleteFilm() throws Exception {
         int filmId = 1;
         FilmDTO film = new FilmDTO(filmId,2004, "Spiderman 2", 7.3f, "Sam Raimi");

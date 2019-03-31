@@ -20,6 +20,7 @@ Run the app:
 Access the app:
 ```
 - Get list of films
+- login credentials: user / password
 https://localhost:8018/demo/films
 
 - Health check ping app
