@@ -39,6 +39,12 @@ Run tests:
 ```
 
 ### To do:
+* Authentication
+  * Add custom login page
+  * Store user credentials in database
+  * Add registration feature
+  * Add forgot password feature
+* turn on csrf for delete
 * Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post
 * Add selenium web tests

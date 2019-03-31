@@ -7,7 +7,7 @@
     <link type="text/css" href="css/main.css" rel="stylesheet" />
 </head>
 <body>
-    <jsp:include page="logout.jsp" />
+    <jsp:include page="auth/logout.jsp" />
     <h1>Spring Boot JSP Add Film</h1>
     <form:form method="post" action="films" modelAttribute="film">
       <form:errors path="*" cssClass="errorblock" element="div" />
