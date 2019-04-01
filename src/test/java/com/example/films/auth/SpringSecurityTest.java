@@ -35,7 +35,8 @@ class SpringSecurityTest {
     void loginWithValidUser() throws Exception {
         FormLoginRequestBuilder login = formLogin()
                 .user(username)
-                .password(password);
+                .password(password)
+                .userParameter(UserDTO.getUserParameter());
 
         mockMvc.perform(login)
                 .andExpect(authenticated().withUsername(username));
@@ -46,7 +47,8 @@ class SpringSecurityTest {
     void loginWithInValidUser() throws Exception {
         FormLoginRequestBuilder login = formLogin()
                 .user("invalidUser")
-                .password("invalidPassword");
+                .password("invalidPassword")
+                .userParameter(UserDTO.getUserParameter());
 
         mockMvc.perform(login)
                 .andExpect(unauthenticated());
