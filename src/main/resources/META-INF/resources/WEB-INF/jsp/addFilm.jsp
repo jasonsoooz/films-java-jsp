@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <td>
-              <input type="submit" value="Submit"/>
+              <input type="submit" class="blue" value="Submit"/>
               <button onclick="location.href = 'films'; return false;">Cancel</button>
             </td>
         </tr>

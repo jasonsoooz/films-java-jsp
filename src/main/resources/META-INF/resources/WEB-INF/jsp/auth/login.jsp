@@ -29,7 +29,9 @@
         </tr>
         <tr>
             <td>
-              <input type="submit" value="Login"/>
+              <input type="submit" class="blue" value="Login"/>
+              <%-- <button disabled>Sign up</button>
+               <a href="#">forgot password</a> --%>
             </td>
         </tr>
      </table>

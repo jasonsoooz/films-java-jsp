@@ -9,7 +9,7 @@ JSP is old tech but still have them at work, so need to keep in touch.
 ## Prerequisites
 * Java Runtime Engine (JRE) 8 & above
 * Gradle
-* Spring Boot and Spring framework
+* Spring Boot 2 and Spring framework 5
 * JUnit 5 tests
 
 Run the app:
@@ -40,7 +40,6 @@ Run tests:
 
 ### To do:
 * Authentication
-  * Add custom login page
   * Store user credentials in database
   * Add registration feature
   * Add forgot password feature
