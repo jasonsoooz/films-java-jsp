@@ -47,11 +47,9 @@ dependencies {
             // To compile jsp files
             'org.apache.tomcat.embed:tomcat-embed-jasper',
             'javax.servlet:jstl',
-            'org.springframework.boot:spring-boot-starter-actuator',
             'org.apache.commons:commons-lang3:3.7',
             // Use gson as preferred JSON http message converter
-            'com.google.code.gson:gson:2.8.5',
-            'org.springframework.boot:spring-boot-starter-security'
+            'com.google.code.gson:gson:2.8.5'
     )
 
     testCompile ('org.assertj:assertj-core:3.9.1',
@@ -59,7 +57,16 @@ dependencies {
             'org.springframework.security:spring-security-test'
     )
 
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation (
+            'org.springframework.boot:spring-boot-starter',
+            'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-starter-security',
+            'org.springframework.boot:spring-boot-starter-data-jpa'
+    )
+
+    runtimeOnly(
+            'com.h2database:h2'
+    )
 
     testImplementation(
             'org.springframework.boot:spring-boot-starter-test',

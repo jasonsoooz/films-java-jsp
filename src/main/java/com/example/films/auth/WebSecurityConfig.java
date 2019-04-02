@@ -17,17 +17,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // result in 403 response
                 .csrf().disable()
                 .authorizeRequests()
+                // allow h2-console access without having to login to films app
+                .antMatchers("/h2-console/**").permitAll()
+                // allow login page to access css resources
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                // custom login page
                 .loginPage("/login")
                 .defaultSuccessUrl("/films")
                 .failureUrl("/login?error=true")
+                // need custom username parameter when not equal to username
                 .usernameParameter(UserDTO.getUserParameter())
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
+
+        // allow h2 console to display after login
+        http.headers().frameOptions().disable();
     }
 }
