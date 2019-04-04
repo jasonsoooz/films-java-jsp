@@ -55,6 +55,8 @@ class FilmControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(content().string(containsString(gson.toJson(films))));
+
+        verify(filmService).getFilms();
     }
 
     // curl -d '{"year":2004,"title":"Spiderman 2","imdbRating":7.3,"director":"Sam Raimi"}' -H "Content-Type: application/json" -X POST http://localhost:8018/demo/films
