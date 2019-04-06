@@ -1,10 +1,15 @@
 package com.example.films.auth;
 
+import com.example.films.auth.login.UserDTO;
+import com.example.films.auth.login.UserRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,7 +35,7 @@ class UserRepositoryTest {
 
     @Test
     void deleteUsers() {
-        insertUser("any","any");
+        insertUser("any", "any");
         assertThat(userRepository.findAll().size()).isEqualTo(1);
 
         userRepository.deleteAll();
@@ -53,6 +58,34 @@ class UserRepositoryTest {
         UserDTO retrievedUser = userRepository.findAll().get(0);
         assertThat(retrievedUser.getEmail()).isEqualTo(updatedEmail);
         assertThat(retrievedUser.getPassword()).isEqualTo(updatedPassword);
+    }
+
+    @Test
+    @DisplayName("find user by email when email does not exist")
+    void findUserByEmail_whenEmailNotExist() {
+        List<UserDTO> emails = userRepository.findByEmail("notExist");
+
+        assertThat(emails.size()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("find user by email when email exists")
+    void findUserByEmail_whenEmailExists() {
+        String email = "exists";
+        String password = "password";
+        insertUser(email, password);
+        insertUser(email, password);
+        assertThat(userRepository.findAll().size()).isEqualTo(2);
+
+        List<UserDTO> emails = userRepository.findByEmail(email);
+
+        assertThat(emails.size()).isEqualTo(2);
+        UserDTO user1 = emails.get(0);
+        assertThat(user1.getEmail()).isEqualTo(email);
+        assertThat(user1.getPassword()).isEqualTo(password);
+        UserDTO user2 = emails.get(1);
+        assertThat(user2.getEmail()).isEqualTo(email);
+        assertThat(user2.getPassword()).isEqualTo(password);
     }
 
     private UserDTO insertUser(String email, String password) {

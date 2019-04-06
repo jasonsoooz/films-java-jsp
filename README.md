@@ -40,8 +40,7 @@ Run tests:
 
 ### To do:
 * Authentication
-  * Store user credentials in database
-  * Add registration feature
+  * encrypt & salt password in database
   * Add forgot password feature
 * turn on csrf for delete
 * Add clear button on form (make sure works for update)

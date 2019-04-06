@@ -9,29 +9,35 @@
 </head>
 <body>
     <h1>Spring Boot JSP Films</h1>
+    <h2>Sign up </h2>
     <c:if test="${not empty error}">
        <div class="errorblock">${error}</div>
     </c:if>
-    <form:form method="post" action="login" modelAttribute="user">
+    <form:form method="post" action="signup" modelAttribute="signup">
       <form:errors path="*" cssClass="errorblock" element="div" />
       <table>
         <tr>
             <td>
-              <input type="text" name="email" value="${user.email}" placeholder="Email" required autofocus />
+              <input type="text" name="email" value="${signup.email}" placeholder="Email" required autofocus />
               <form:errors path="email" cssClass="error" /><br />
             </td>
         </tr>
         <tr>
             <td>
-              <input type="password" name="password" value="${user.password}" placeholder="Password" />
+              <input type="password" name="password" value="${signup.password}" placeholder="Password" required autofocus />
               <form:errors path="password" cssClass="error" /><br />
             </td>
         </tr>
         <tr>
             <td>
-              <input type="submit" class="blue" value="Login"/>
-              <button onclick="location.href = 'signup'">Sign up</button>
-               <%-- <a href="#">forgot password</a> --%>
+              <input type="password" name="confirmPassword" value="${signup.confirmPassword}" placeholder="Confirm password" required autofocus />
+              <form:errors path="confirmPassword" cssClass="error" /><br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <input type="submit" class="blue" value="Sign up"/>
+              <button onclick="location.href = 'login'; return false;">Cancel</button>
             </td>
         </tr>
      </table>

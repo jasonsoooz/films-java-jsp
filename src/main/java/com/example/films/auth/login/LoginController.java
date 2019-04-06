@@ -1,4 +1,4 @@
-package com.example.films.auth;
+package com.example.films.auth.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, @RequestParam(required = false) String error) {
         if (error != null) {
-            model.addAttribute("error", "Bad credentials");
+            model.addAttribute("error", "Your username and password is incorrect");
         }
 
         model.addAttribute("user", new UserDTO());

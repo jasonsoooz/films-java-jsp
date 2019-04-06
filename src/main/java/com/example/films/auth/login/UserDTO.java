@@ -1,4 +1,6 @@
-package com.example.films.auth;
+package com.example.films.auth.login;
+
+import com.example.films.auth.signup.SignupDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,5 +49,9 @@ public class UserDTO {
 
     public static String getUserParameter() {
         return "email";
+    }
+
+    public static UserDTO of(SignupDTO signup) {
+        return new UserDTO(signup.getEmail(), signup.getPassword());
     }
 }
