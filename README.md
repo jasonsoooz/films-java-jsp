@@ -43,8 +43,8 @@ Run tests:
 * turn on csrf for delete
 * Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post
+* Change film service to database repository instead of in memory list
 * Add selenium web tests
 * fix SpringBootTest disabled tests failing with PKIX ssl errors
 * Improve actuator health check (eg add ping response, etc)
 * Disallow adding same film (business key = year, title, director)
-* Add database? (eg mysql)

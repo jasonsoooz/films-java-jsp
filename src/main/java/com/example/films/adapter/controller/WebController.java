@@ -3,8 +3,6 @@ package com.example.films.adapter.controller;
 
 import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +28,6 @@ public class WebController {
     public String films(Model model) {
         List<FilmDTO> films = filmService.getFilms();
         model.addAttribute("films", films);
-        model.addAttribute("principal", getPrincipalFromSecurityContext().getUsername());
         return "films";
     }
 
@@ -40,7 +37,6 @@ public class WebController {
             model.addAttribute("film", new FilmDTO());
         }
 
-        model.addAttribute("principal", getPrincipalFromSecurityContext().getUsername());
         return "addFilm";
     }
 
@@ -73,9 +69,5 @@ public class WebController {
     public String deleteFilm(@PathVariable("id") Long id) {
         filmService.deleteFilm(id.intValue());
         return "redirect:/films";
-    }
-
-    private UserDetails getPrincipalFromSecurityContext() {
-        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
