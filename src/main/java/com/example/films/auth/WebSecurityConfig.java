@@ -41,6 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                // FIXME: clean up session & delete cookies
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true)
                 .permitAll();
 
         // allow h2 console to display after login
