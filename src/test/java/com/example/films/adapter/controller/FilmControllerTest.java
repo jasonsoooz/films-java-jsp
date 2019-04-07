@@ -2,6 +2,7 @@ package com.example.films.adapter.controller;
 
 import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
+import com.example.films.port.provides.UserService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = {FilmController.class})
+@WebMvcTest
 class FilmControllerTest {
 
     @Autowired
@@ -38,6 +40,12 @@ class FilmControllerTest {
 
     @MockBean
     private FilmService filmService;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private DataSource dataSource;
 
     @Autowired
     private Gson gson;

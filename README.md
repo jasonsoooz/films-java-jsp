@@ -39,9 +39,7 @@ Run tests:
 ```
 
 ### To do:
-* Authentication
-  * encrypt & salt password in database
-  * Add forgot password feature
+* Add forgot password feature
 * turn on csrf for delete
 * Add clear button on form (make sure works for update)
 * Replace delete method with delete rest request instead of post

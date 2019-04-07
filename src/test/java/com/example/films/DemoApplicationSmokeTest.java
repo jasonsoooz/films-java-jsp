@@ -2,6 +2,7 @@ package com.example.films;
 
 import com.example.films.adapter.controller.FilmController;
 import com.example.films.auth.login.LoginController;
+import com.example.films.auth.login.UserRepository;
 import com.example.films.auth.signup.SignupController;
 import com.example.films.port.provides.FilmService;
 import com.example.films.port.provides.UserService;
@@ -16,7 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DemoApplicationSmokeTest {
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private FilmService filmService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private FilmController filmController;
@@ -28,10 +35,16 @@ class DemoApplicationSmokeTest {
     private SignupController signupController;
 
     @Autowired
-    private UserService userService;
+    private DemoFilmsApplication demoFilmsApplication;
 
     @Test
-    @DisplayName("service should load")
+    @DisplayName("repository should load")
+    void contextRepositoryLoads() {
+        assertThat(userRepository).isNotNull();
+    }
+
+    @Test
+    @DisplayName("services should load")
     void contextServiceLoads() {
         assertThat(filmService).isNotNull();
         assertThat(userService).isNotNull();
@@ -43,5 +56,11 @@ class DemoApplicationSmokeTest {
         assertThat(filmController).isNotNull();
         assertThat(loginController).isNotNull();
         assertThat(signupController).isNotNull();
+    }
+
+    @Test
+    @DisplayName("application should load")
+    void contextApplicationLoads() {
+        assertThat(demoFilmsApplication).isNotNull();
     }
 }

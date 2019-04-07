@@ -1,11 +1,18 @@
 package com.example.films.auth;
 
 import com.example.films.auth.login.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -38,5 +45,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // allow h2 console to display after login
         http.headers().frameOptions().disable();
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("select email, password, true from UserDTO where email = ?")
+                // No roles table at the moment
+        .authoritiesByUsernameQuery("select email, 'roleNotUsed' from UserDTO where email = ?");
     }
 }

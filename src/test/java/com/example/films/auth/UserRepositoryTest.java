@@ -2,11 +2,13 @@ package com.example.films.auth;
 
 import com.example.films.auth.login.UserDTO;
 import com.example.films.auth.login.UserRepository;
+import com.example.films.port.provides.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -19,6 +21,9 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @MockBean
+    private UserService userService;
 
     @Test
     void insertAndRetrieveUsers() {
