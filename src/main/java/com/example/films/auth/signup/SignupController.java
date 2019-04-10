@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @Controller
 public class SignupController {
 
-    @Resource
     private UserService userService;
+
+    public SignupController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model) {

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,8 +20,11 @@ import static java.lang.String.format;
 @Controller
 public class WebController {
 
-    @Resource
     private FilmService filmService;
+
+    public WebController(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     @RequestMapping(value = "/films", method = RequestMethod.GET)
     public String films(Model model) {

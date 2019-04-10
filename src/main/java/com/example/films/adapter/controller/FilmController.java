@@ -5,7 +5,6 @@ import com.example.films.port.provides.FilmService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController
 public class FilmController {
 
-    @Resource
     private FilmService filmService;
+
+    public FilmController(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     @RequestMapping(value = "/films2", method = RequestMethod.GET)
     public List<FilmDTO> getFilms() {
