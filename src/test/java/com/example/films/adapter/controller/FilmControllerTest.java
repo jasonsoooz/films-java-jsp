@@ -2,7 +2,6 @@ package com.example.films.adapter.controller;
 
 import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
-import com.example.films.port.provides.UserService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(controllers = FilmController.class)
 class FilmControllerTest {
 
     @Autowired
@@ -40,9 +39,6 @@ class FilmControllerTest {
 
     @MockBean
     private FilmService filmService;
-
-    @MockBean
-    private UserService userService;
 
     @MockBean
     private DataSource dataSource;

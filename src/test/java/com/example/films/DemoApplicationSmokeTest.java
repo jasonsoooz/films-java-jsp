@@ -37,6 +37,9 @@ class DemoApplicationSmokeTest {
     @Autowired
     private DemoFilmsApplication demoFilmsApplication;
 
+    @Autowired
+    private DefaultDataLoader defaultDataLoader;
+
     @Test
     @DisplayName("repository should load")
     void contextRepositoryLoads() {
@@ -62,5 +65,6 @@ class DemoApplicationSmokeTest {
     @DisplayName("application should load")
     void contextApplicationLoads() {
         assertThat(demoFilmsApplication).isNotNull();
+        assertThat(defaultDataLoader).isNotNull();
     }
 }
