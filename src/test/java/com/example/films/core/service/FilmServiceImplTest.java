@@ -28,7 +28,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should insert and get films")
     void shouldInsertAndGetFilms() {
-        FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi");
 
         filmService.saveFilm(film);
 
@@ -40,19 +40,19 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should update film")
     void shouldUpdateFilm() {
-        FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi");
         filmService.saveFilm(film);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
-        int updatedYear = 2003;
+        String updatedReleaseDateString = "2004-06-22";
         String updatedTitle = "Spiderman 2";
-        film.setYear(updatedYear);
+        film.setReleaseDateString(updatedReleaseDateString);
         film.setTitle(updatedTitle);
         filmService.saveFilm(film);
 
         assertThat(filmService.getFilms().size()).isEqualTo(1);
         FilmDTO updatedFilm = filmService.getFilms().get(0);
-        assertThat(updatedFilm.getYear()).isEqualTo(updatedYear);
+        assertThat(updatedFilm.getReleaseDateString()).isEqualTo(updatedReleaseDateString);
         assertThat(updatedFilm.getTitle()).isEqualTo(updatedTitle);
     }
 
@@ -60,7 +60,7 @@ class FilmServiceImplTest {
     @DisplayName("should delete film")
     void shouldDeleteFilm() {
         int filmId = 1;
-        insertFilm(filmId, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        insertFilm(filmId, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi");
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         filmService.deleteFilm(filmId);
@@ -71,7 +71,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should throw exception if deleting film not found")
     void shouldThrowExceptionIfDeletingFilmNotFound() {
-        insertFilm(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        insertFilm(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi");
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         int notFoundId = 0;
@@ -80,7 +80,7 @@ class FilmServiceImplTest {
                 .hasMessage(format("film id: %s not found", notFoundId));
     }
 
-    private void insertFilm(int id, int year, String title, float imdbRating, String director) {
-        filmService.saveFilm(new FilmDTO(id, year, title, imdbRating, director));
+    private void insertFilm(int id, String releaseDateString, String title, float imdbRating, String director) {
+        filmService.saveFilm(new FilmDTO(id, releaseDateString, title, imdbRating, director));
     }
 }

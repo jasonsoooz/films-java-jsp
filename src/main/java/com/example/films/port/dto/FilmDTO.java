@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -12,8 +11,8 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class FilmDTO {
     private int id;
 
-    @Min(value = 1, message = "Year must be greater than or equal 1")
-    private int year;
+    @NotEmpty
+    private String releaseDateString;
 
     @NotEmpty(message = "Film title must not be empty")
     private String title;
@@ -23,9 +22,9 @@ public class FilmDTO {
 
     public FilmDTO() {}
 
-    public FilmDTO(int id, int year, String title, float imdbRating, String director) {
+    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director) {
         this.id = id;
-        this.year = year;
+        this.releaseDateString = releaseDateString;
         this.title = title;
         this.imdbRating = imdbRating;
         this.director = director;
@@ -33,7 +32,7 @@ public class FilmDTO {
 
     public static FilmDTO of(FilmDTO film) {
         return new FilmDTO(film.getId(),
-                film.getYear(),
+                film.getReleaseDateString(),
                 film.getTitle(),
                 film.getImdbRating(),
                 film.getDirector());
@@ -47,12 +46,12 @@ public class FilmDTO {
         this.id = id;
     }
 
-    public int getYear() {
-        return year;
+    public String getReleaseDateString() {
+        return releaseDateString;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setReleaseDateString(String releaseDateString) {
+        this.releaseDateString = releaseDateString;
     }
 
     public String getTitle() {

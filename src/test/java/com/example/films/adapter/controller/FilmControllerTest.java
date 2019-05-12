@@ -51,7 +51,7 @@ class FilmControllerTest {
     @DisplayName("should get films")
     void shouldGetFilms() throws Exception {
         List<FilmDTO> films = new ArrayList<>();
-        films.add(new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi"));
+        films.add(new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi"));
         when(filmService.getFilms()).thenReturn(films);
 
         this.mockMvc.perform(get("/films2"))
@@ -68,7 +68,7 @@ class FilmControllerTest {
     @WithMockUser
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
-        FilmDTO film = new FilmDTO(1, 2002, "Spiderman", 7.3f, "Sam Raimi");
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(post("/films2/")
                 .content(gson.toJson(film))
@@ -85,7 +85,7 @@ class FilmControllerTest {
     @WithMockUser
     void shouldDeleteFilm() throws Exception {
         int filmId = 1;
-        FilmDTO film = new FilmDTO(filmId,2004, "Spiderman 2", 7.3f, "Sam Raimi");
+        FilmDTO film = new FilmDTO(filmId,"2004-06-22", "Spiderman 2", 7.3f, "Sam Raimi");
 
         this.mockMvc.perform(delete("/films2/" + filmId)
                 .content(gson.toJson(film))
