@@ -7,7 +7,7 @@ Simple web app that uses Spring Boot to serve up films on back end.  For coding 
 JSP is old tech but still have them at work, so need to keep in touch.
 
 ## Prerequisites
-* Java Runtime Engine (JRE) 8 & above
+* Java Runtime Engine (JRE) 12 & above
 * Gradle
 * Spring Boot 2 and Spring framework 5
 * JUnit 5 tests
@@ -15,6 +15,9 @@ JSP is old tech but still have them at work, so need to keep in touch.
 Run the app:
 ```
 ./gradlew bootrun
+
+# To pass command line args to program
+./gradlew bootrun -Pargs=example
 ```
 
 Access the app:

@@ -27,6 +27,12 @@ project.ext {
     junit5Version = '5.2.0'
 }
 
+bootRun {
+    if (project.hasProperty('args')) {
+        args project.args.split(',')
+    }
+}
+
 // To debug: ./gradlew bootrun -Ddebug=true
 tasks.withType(JavaExec) {
     if (System.getProperty('debug', 'false') == 'true') {
