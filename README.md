@@ -6,8 +6,8 @@ Simple web app that uses Spring Boot to serve up films on back end.  For coding 
 
 JSP is old tech but still have them at work, so need to keep in touch.
 
-This example uses **in memory** database = **h2**.  
-To use **mysql**, check out support branch = **support/mysql**
+This example uses database = **mysql**.  
+To use **in memory** database **h2**, check out **master** branch
 
 ## Prerequisites
 * Java Runtime Engine (JRE) 12 & above

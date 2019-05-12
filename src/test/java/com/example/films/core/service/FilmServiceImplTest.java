@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static com.example.films.port.dto.Genre.ACTION;
@@ -31,7 +32,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should insert and get films")
     void shouldInsertAndGetFilms() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
 
         filmService.saveFilm(film);
 
@@ -43,7 +44,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should update film")
     void shouldUpdateFilm() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION,false);
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION,false);
         filmService.saveFilm(film);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
@@ -69,7 +70,7 @@ class FilmServiceImplTest {
     @DisplayName("should delete film")
     void shouldDeleteFilm() {
         int filmId = 1;
-        insertFilm(filmId, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
+        insertFilm(filmId, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         filmService.deleteFilm(filmId);
@@ -80,7 +81,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should throw exception if deleting film not found")
     void shouldThrowExceptionIfDeletingFilmNotFound() {
-        insertFilm(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
+        insertFilm(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         int notFoundId = 0;
@@ -89,7 +90,7 @@ class FilmServiceImplTest {
                 .hasMessage(format("film id: %s not found", notFoundId));
     }
 
-    private void insertFilm(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre, boolean isAwardWinning) {
+    private void insertFilm(int id, String releaseDateString, String title, BigDecimal imdbRating, String director, Genre genre, boolean isAwardWinning) {
         filmService.saveFilm(new FilmDTO(id, releaseDateString, title, imdbRating, director, genre, isAwardWinning));
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ class FilmControllerTest {
     @DisplayName("should get films")
     void shouldGetFilms() throws Exception {
         List<FilmDTO> films = new ArrayList<>();
-        films.add(new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false));
+        films.add(new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false));
         when(filmService.getFilms()).thenReturn(films);
 
         this.mockMvc.perform(get("/films2"))
@@ -69,7 +70,7 @@ class FilmControllerTest {
     @WithMockUser
     @DisplayName("should add film")
     void shouldAddFilm() throws Exception {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
 
         this.mockMvc.perform(post("/films2/")
                 .content(gson.toJson(film))
@@ -86,7 +87,7 @@ class FilmControllerTest {
     @WithMockUser
     void shouldDeleteFilm() throws Exception {
         int filmId = 1;
-        FilmDTO film = new FilmDTO(filmId,"2004-06-22", "Spiderman 2", 7.3f, "Sam Raimi", ACTION, false);
+        FilmDTO film = new FilmDTO(filmId,"2004-06-22", "Spiderman 2", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
 
         this.mockMvc.perform(delete("/films2/" + filmId)
                 .content(gson.toJson(film))

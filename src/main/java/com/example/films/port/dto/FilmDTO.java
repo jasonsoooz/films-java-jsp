@@ -6,10 +6,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.constraints.NotEmpty;
 
+import java.math.BigDecimal;
+
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 public class FilmDTO {
-    private int id;
+    private long id;
 
     @NotEmpty(message = "Film release date must not be empty")
     private String releaseDateString;
@@ -17,14 +19,14 @@ public class FilmDTO {
     @NotEmpty(message = "Film title must not be empty")
     private String title;
 
-    private float imdbRating;
+    private BigDecimal imdbRating;
     private String director;
     private Genre genre;
     private boolean isAwardWinning;
 
     public FilmDTO() {}
 
-    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre, boolean isAwardWinning) {
+    public FilmDTO(long id, String releaseDateString, String title, BigDecimal imdbRating, String director, Genre genre, boolean isAwardWinning) {
         this.id = id;
         this.releaseDateString = releaseDateString;
         this.title = title;
@@ -45,11 +47,11 @@ public class FilmDTO {
         );
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -69,11 +71,11 @@ public class FilmDTO {
         this.title = title;
     }
 
-    public float getImdbRating() {
+    public BigDecimal getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(float imdbRating) {
+    public void setImdbRating(BigDecimal imdbRating) {
         this.imdbRating = imdbRating;
     }
 

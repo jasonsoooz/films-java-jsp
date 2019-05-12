@@ -4,6 +4,7 @@ import com.example.films.adapter.controller.FilmController;
 import com.example.films.auth.login.LoginController;
 import com.example.films.auth.login.UserRepository;
 import com.example.films.auth.signup.SignupController;
+import com.example.films.core.repository.FilmRepository;
 import com.example.films.port.provides.FilmService;
 import com.example.films.port.provides.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -18,6 +19,9 @@ class DemoApplicationSmokeTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private FilmRepository filmRepository;
 
     @Autowired
     private FilmService filmService;
@@ -44,6 +48,7 @@ class DemoApplicationSmokeTest {
     @DisplayName("repository should load")
     void contextRepositoryLoads() {
         assertThat(userRepository).isNotNull();
+        assertThat(filmRepository).isNotNull();
     }
 
     @Test

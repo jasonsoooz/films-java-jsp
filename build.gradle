@@ -55,7 +55,8 @@ dependencies {
             'javax.servlet:jstl',
             'org.apache.commons:commons-lang3:3.7',
             // Use gson as preferred JSON http message converter
-            'com.google.code.gson:gson:2.8.5'
+            'com.google.code.gson:gson:2.8.5',
+            'mysql:mysql-connector-java:8.0.16'
     )
 
     testCompile ('org.assertj:assertj-core:3.9.1',
