@@ -20,16 +20,18 @@ public class FilmDTO {
     private float imdbRating;
     private String director;
     private Genre genre;
+    private boolean isAwardWinning;
 
     public FilmDTO() {}
 
-    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre) {
+    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre, boolean isAwardWinning) {
         this.id = id;
         this.releaseDateString = releaseDateString;
         this.title = title;
         this.imdbRating = imdbRating;
         this.director = director;
         this.genre = genre;
+        this.isAwardWinning = isAwardWinning;
     }
 
     public static FilmDTO of(FilmDTO film) {
@@ -38,7 +40,8 @@ public class FilmDTO {
                 film.getTitle(),
                 film.getImdbRating(),
                 film.getDirector(),
-                film.getGenre()
+                film.getGenre(),
+                film.getIsAwardWinning()
         );
     }
 
@@ -88,6 +91,14 @@ public class FilmDTO {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public boolean getIsAwardWinning() {
+        return isAwardWinning;
+    }
+
+    public void setIsAwardWinning(boolean isAwardWinning) {
+        this.isAwardWinning = isAwardWinning;
     }
 
     @Override

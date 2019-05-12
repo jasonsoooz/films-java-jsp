@@ -31,7 +31,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should insert and get films")
     void shouldInsertAndGetFilms() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION);
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
 
         filmService.saveFilm(film);
 
@@ -43,16 +43,18 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should update film")
     void shouldUpdateFilm() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION);
+        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION,false);
         filmService.saveFilm(film);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         String updatedReleaseDateString = "2004-06-22";
         String updatedTitle = "Spiderman 2";
         Genre updatedGenre = SCI_FICTION;
+        boolean updatedIsAwardWinning = true;
         film.setReleaseDateString(updatedReleaseDateString);
         film.setTitle(updatedTitle);
         film.setGenre(updatedGenre);
+        film.setIsAwardWinning(updatedIsAwardWinning);
         filmService.saveFilm(film);
 
         assertThat(filmService.getFilms().size()).isEqualTo(1);
@@ -60,13 +62,14 @@ class FilmServiceImplTest {
         assertThat(updatedFilm.getReleaseDateString()).isEqualTo(updatedReleaseDateString);
         assertThat(updatedFilm.getTitle()).isEqualTo(updatedTitle);
         assertThat(updatedFilm.getGenre()).isEqualTo(updatedGenre);
+        assertThat(updatedFilm.getIsAwardWinning()).isEqualTo(updatedIsAwardWinning);
     }
 
     @Test
     @DisplayName("should delete film")
     void shouldDeleteFilm() {
         int filmId = 1;
-        insertFilm(filmId, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION);
+        insertFilm(filmId, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         filmService.deleteFilm(filmId);
@@ -77,7 +80,7 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should throw exception if deleting film not found")
     void shouldThrowExceptionIfDeletingFilmNotFound() {
-        insertFilm(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION);
+        insertFilm(1, "2002-04-29", "Spiderman", 7.3f, "Sam Raimi", ACTION, false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
         int notFoundId = 0;
@@ -86,7 +89,7 @@ class FilmServiceImplTest {
                 .hasMessage(format("film id: %s not found", notFoundId));
     }
 
-    private void insertFilm(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre) {
-        filmService.saveFilm(new FilmDTO(id, releaseDateString, title, imdbRating, director, genre));
+    private void insertFilm(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre, boolean isAwardWinning) {
+        filmService.saveFilm(new FilmDTO(id, releaseDateString, title, imdbRating, director, genre, isAwardWinning));
     }
 }
