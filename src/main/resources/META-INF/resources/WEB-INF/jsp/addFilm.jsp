@@ -28,6 +28,23 @@
             </td>
         </tr>
         <tr>
+            <td><form:label path="genre">Genre</form:label></td>
+            <td>
+              <select name="genre">
+                  <option value=""></option>
+                  <option value="ACTION" ${film.genre == 'ACTION' ? 'selected' : ''}>Action</option>
+                  <option value="MARTIAL_ARTS" ${film.genre == 'MARTIAL_ARTS' ? 'selected' : ''}>Martial arts</option>
+                  <option value="ROMANCE" ${film.genre == 'ROMANCE' ? 'selected' : ''}>Romance</option>
+                  <option value="COMEDY" ${film.genre == 'COMEDY' ? 'selected' : ''}>Comedy</option>
+                  <option value="THRILLER" ${film.genre == 'THRILLER' ? 'selected' : ''}>Thriller</option>
+                  <option value="SCI_FICTION" ${film.genre == 'SCI_FICTION' ? 'selected' : ''}>Science fiction</option>
+                  <option value="HORROR" ${film.genre == 'HORROR' ? 'selected' : ''}>Horror</option>
+                  <option value="DRAMA" ${film.genre == 'DRAMA' ? 'selected' : ''}>Drama</option>
+                  <option value="CHILDREN" ${film.genre == 'CHILDREN' ? 'selected' : ''}>Children</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td><form:label path="imdbRating">Imdb Rating</form:label></td>
             <td><input type="number" name="imdbRating" step="0.1" value="${film.imdbRating}" /></td>
         </tr>

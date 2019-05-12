@@ -16,9 +16,10 @@
     <button onclick="location.href = 'film';" class="blue">Add film</button>
     <table>
       <tr>
-        <th>No</th>
+        <th>Id</th>
         <th>Film</th>
         <th>Release date</th>
+        <th>Genre</th>
         <th>Imdb rating</th>
         <th>Director</th>
         <th>Action</th>
@@ -28,6 +29,7 @@
           <td>${film.id}</td>
           <td>${film.title}</td>
           <td>${film.releaseDateString}</td>
+          <td>${film.genre}</td>
           <td>${film.imdbRating}</td>
           <td>${film.director}</td>
           <td>
