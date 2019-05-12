@@ -63,6 +63,6 @@ FOR EACH ROW
 CREATE TABLE User (
   id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL
   , email varchar(50) NOT NULL
-  , password varchar(60) NOT NULL
+  , password varchar(100) NOT NULL
 --  , enabled boolean default false NOT NULL
 );
