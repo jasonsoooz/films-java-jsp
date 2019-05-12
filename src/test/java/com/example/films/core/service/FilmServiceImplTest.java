@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,8 +16,7 @@ import java.util.List;
 import static com.example.films.port.dto.Genre.ACTION;
 import static com.example.films.port.dto.Genre.SCI_FICTION;
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 class FilmServiceImplTest {
@@ -32,48 +32,40 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should insert and get films")
     void shouldInsertAndGetFilms() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
+        FilmDTO expectedFilm = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
 
-        filmService.saveFilm(film);
+        filmService.saveFilm(expectedFilm);
 
         List<FilmDTO> films = filmService.getFilms();
         assertThat(films.size()).isEqualTo(1);
-        assertThat(films).contains(film);
+        FilmDTO actualFilm = films.get(0);
+        assertFilm(actualFilm, expectedFilm);
     }
 
     @Test
     @DisplayName("should update film")
     void shouldUpdateFilm() {
-        FilmDTO film = new FilmDTO(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION,false);
-        filmService.saveFilm(film);
+        FilmDTO expectedFilm = insertFilm(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION,false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
-        String updatedReleaseDateString = "2004-06-22";
-        String updatedTitle = "Spiderman 2";
-        Genre updatedGenre = SCI_FICTION;
-        boolean updatedIsAwardWinning = true;
-        film.setReleaseDateString(updatedReleaseDateString);
-        film.setTitle(updatedTitle);
-        film.setGenre(updatedGenre);
-        film.setIsAwardWinning(updatedIsAwardWinning);
-        filmService.saveFilm(film);
+        expectedFilm.setReleaseDateString("2004-06-22");
+        expectedFilm.setTitle("Spiderman 2");
+        expectedFilm.setGenre(SCI_FICTION);
+        expectedFilm.setIsAwardWinning(true);
+        filmService.saveFilm(expectedFilm);
 
         assertThat(filmService.getFilms().size()).isEqualTo(1);
-        FilmDTO updatedFilm = filmService.getFilms().get(0);
-        assertThat(updatedFilm.getReleaseDateString()).isEqualTo(updatedReleaseDateString);
-        assertThat(updatedFilm.getTitle()).isEqualTo(updatedTitle);
-        assertThat(updatedFilm.getGenre()).isEqualTo(updatedGenre);
-        assertThat(updatedFilm.getIsAwardWinning()).isEqualTo(updatedIsAwardWinning);
+        FilmDTO actualFilm = filmService.getFilms().get(0);
+        assertFilm(actualFilm, expectedFilm);
     }
 
     @Test
     @DisplayName("should delete film")
     void shouldDeleteFilm() {
-        int filmId = 1;
-        insertFilm(filmId, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
+        FilmDTO expectedFilm = insertFilm(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
         assertThat(filmService.getFilms().size()).isEqualTo(1);
 
-        filmService.deleteFilm(filmId);
+        filmService.deleteFilm(expectedFilm.getId());
 
         assertThat(filmService.getFilms().size()).isEqualTo(0);
     }
@@ -81,16 +73,28 @@ class FilmServiceImplTest {
     @Test
     @DisplayName("should throw exception if deleting film not found")
     void shouldThrowExceptionIfDeletingFilmNotFound() {
-        insertFilm(1, "2002-04-29", "Spiderman", BigDecimal.valueOf(7.3), "Sam Raimi", ACTION, false);
-        assertThat(filmService.getFilms().size()).isEqualTo(1);
+        int notFoundId = -1;
 
-        int notFoundId = 0;
         assertThatThrownBy(() -> filmService.deleteFilm(notFoundId))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(format("film id: %s not found", notFoundId));
+                .isInstanceOf(EmptyResultDataAccessException.class)
+                .hasMessageStartingWith("No")
+                .hasMessageContaining(format("entity with id %s exists", notFoundId));
     }
 
-    private void insertFilm(int id, String releaseDateString, String title, BigDecimal imdbRating, String director, Genre genre, boolean isAwardWinning) {
-        filmService.saveFilm(new FilmDTO(id, releaseDateString, title, imdbRating, director, genre, isAwardWinning));
+    private FilmDTO insertFilm(long id, String releaseDateString, String title, BigDecimal imdbRating,
+                               String director, Genre genre, boolean isAwardWinning) {
+        FilmDTO film = new FilmDTO(id, releaseDateString, title, imdbRating, director, genre, isAwardWinning);
+
+        return filmService.saveFilm(film);
+    }
+
+    private void assertFilm(FilmDTO actual, FilmDTO expected) {
+        assertThat(actual.getReleaseDateString()).isEqualTo(expected.getReleaseDateString());
+        assertThat(actual.getTitle()).isEqualTo(expected.getTitle());
+        // actual has decimal place & expected doesn't
+        assertThat(actual.getImdbRating().intValue()).isEqualTo(expected.getImdbRating().intValue());
+        assertThat(actual.getDirector()).isEqualTo(expected.getDirector());
+        assertThat(actual.getGenre()).isEqualTo(expected.getGenre());
+        assertThat(actual.getIsAwardWinning()).isEqualTo(expected.getIsAwardWinning());
     }
 }

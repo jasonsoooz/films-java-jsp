@@ -1,10 +1,12 @@
 package com.example.films.core.service;
 
+import com.example.films.core.entity.FilmEntity;
+import com.example.films.core.repository.FilmRepository;
 import com.example.films.port.dto.FilmDTO;
 import com.example.films.port.provides.FilmService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,63 +15,42 @@ import static java.lang.String.format;
 @Service
 public class FilmServiceImpl implements FilmService {
 
-    private List<FilmDTO> films;
-
-    public FilmServiceImpl() {
-        this.films = new ArrayList<>();
-    }
+    @Autowired
+    private FilmRepository filmRepository;
 
     @Override
     public List<FilmDTO> getFilms() {
-        return films;
+        return filmRepository.findAll().stream()
+                .map(FilmDTO::of)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void saveFilm(FilmDTO filmDTO) {
+    public FilmDTO saveFilm(FilmDTO filmDTO) {
         // copy element so changes of element don't affect list
         FilmDTO copy = FilmDTO.of(filmDTO);
 
-        long index = findIndex(copy.getId());
-        // not found
-        if (index == -1) {
-            // add
-            copy.setId(getNextId(copy.getId()));
-            films.add(copy);
-        } else {
-            // update
-            films.set(Long.valueOf(index).intValue(), copy);
-        }
+        return FilmDTO.of(filmRepository.save(FilmEntity.of(copy)));
     }
 
     @Override
-    public void deleteFilm(int id) {
-        films.remove(find(id));
+    public void deleteFilm(long id) {
+        filmRepository.deleteById(id);
     }
 
     @Override
     public void clear() {
-        films.clear();
+        filmRepository.deleteAll();
     }
 
     @Override
-    public FilmDTO find(int id) {
-        return films.stream().filter(film -> film.getId() == id)
-                .findFirst()
-                .<IllegalArgumentException>orElseThrow(() -> {
-                    throw new IllegalArgumentException(format("film id: %s not found", id));
-                });
-    }
+    public FilmDTO find(long id) {
+        FilmEntity filmEntity = filmRepository.findById(id)
+                .orElseThrow(() -> {
+                            throw new IllegalArgumentException(format("film id: %s not found", id));
+                        }
+                );
 
-    private int findIndex(long id) {
-        List<Long> ids = films.stream()
-                .map(FilmDTO::getId)
-                .collect(Collectors.toList());
-        return ids.indexOf(id);
-    }
-
-    private long getNextId(long id) {
-        if (id > 0) return id;
-
-        return films.size() + 1;
+        return FilmDTO.of(filmEntity);
     }
 }

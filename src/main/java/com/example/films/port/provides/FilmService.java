@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface FilmService {
     List<FilmDTO> getFilms();
-    FilmDTO find(int id);
-    void saveFilm(FilmDTO filmDTO);
-    void deleteFilm(int id);
+    FilmDTO find(long id);
+    FilmDTO saveFilm(FilmDTO filmDTO);
+    void deleteFilm(long id);
     void clear();
 }

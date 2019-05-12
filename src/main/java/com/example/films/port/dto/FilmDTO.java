@@ -1,5 +1,6 @@
 package com.example.films.port.dto;
 
+import com.example.films.core.entity.FilmEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -44,6 +45,17 @@ public class FilmDTO {
                 film.getDirector(),
                 film.getGenre(),
                 film.getIsAwardWinning()
+        );
+    }
+
+    public static FilmDTO of(FilmEntity film) {
+        return new FilmDTO(film.getId(),
+                film.getReleaseDate().toString(),
+                film.getTitle(),
+                film.getImdbRating(),
+                film.getDirector(),
+                film.getGenre(),
+                film.isAwardWinning()
         );
     }
 
