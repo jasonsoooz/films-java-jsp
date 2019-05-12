@@ -19,15 +19,17 @@ public class FilmDTO {
 
     private float imdbRating;
     private String director;
+    private Genre genre;
 
     public FilmDTO() {}
 
-    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director) {
+    public FilmDTO(int id, String releaseDateString, String title, float imdbRating, String director, Genre genre) {
         this.id = id;
         this.releaseDateString = releaseDateString;
         this.title = title;
         this.imdbRating = imdbRating;
         this.director = director;
+        this.genre = genre;
     }
 
     public static FilmDTO of(FilmDTO film) {
@@ -35,7 +37,9 @@ public class FilmDTO {
                 film.getReleaseDateString(),
                 film.getTitle(),
                 film.getImdbRating(),
-                film.getDirector());
+                film.getDirector(),
+                film.getGenre()
+        );
     }
 
     public int getId() {
@@ -76,6 +80,14 @@ public class FilmDTO {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
