@@ -7,6 +7,7 @@ import com.example.films.port.provides.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,9 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public List<FilmDTO> getFilms() {
         return filmRepository.findAll().stream()
+                .sorted(Comparator.comparing(FilmEntity::getReleaseDate).reversed()
+                        .thenComparing(FilmEntity::getImdbRating).reversed()
+                )
                 .map(FilmDTO::of)
                 .collect(Collectors.toList());
     }
