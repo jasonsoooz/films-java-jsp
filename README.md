@@ -6,6 +6,9 @@ Simple web app that uses Spring Boot to serve up films on back end.  For coding 
 
 JSP is old tech but still have them at work, so need to keep in touch.
 
+This example uses **in memory** database = **h2**.  
+To use **mysql**, check out support branch = **support/mysql**
+
 ## Prerequisites
 * Java Runtime Engine (JRE) 12 & above
 * Gradle
@@ -25,9 +28,6 @@ Access the app:
 - Get list of films
 - login credentials: user / password
 https://localhost:8018/demo/films
-
-- Health check ping app
-https://localhost:8018/demo/ping
 
 - Spring actuator urls
 http://localhost:8015/demo/actuator
