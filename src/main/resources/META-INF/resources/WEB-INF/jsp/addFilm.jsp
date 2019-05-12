@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +48,19 @@
         <tr>
             <td><form:label path="imdbRating">Imdb Rating</form:label></td>
             <td><input type="number" name="imdbRating" step="0.1" value="${film.imdbRating}" /></td>
+        </tr>
+        <tr>
+            <td><form:label path="isAwardWinning">Is award winning?</form:label></td>
+            <td>
+              <c:choose>
+                <c:when test="${film.isAwardWinning == true}">
+                  <input type="checkbox" name="isAwardWinning" checked="checked" />
+                </c:when>
+                <c:otherwise>
+                  <input type="checkbox" name="isAwardWinning" />
+                </c:otherwise>
+              </c:choose>
+            </td>
         </tr>
         <tr>
             <td><form:label path="director">Director</form:label></td>

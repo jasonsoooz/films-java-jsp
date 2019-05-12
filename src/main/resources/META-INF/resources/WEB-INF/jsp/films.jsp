@@ -21,6 +21,7 @@
         <th>Release date</th>
         <th>Genre</th>
         <th>Imdb rating</th>
+        <th>Is award winning</th>
         <th>Director</th>
         <th>Action</th>
       </tr>
@@ -31,6 +32,7 @@
           <td>${film.releaseDateString}</td>
           <td>${film.genre}</td>
           <td>${film.imdbRating}</td>
+          <td>${film.isAwardWinning}</td>
           <td>${film.director}</td>
           <td>
             <button onclick="location.href = 'films/${film.id}'">Update</button>
