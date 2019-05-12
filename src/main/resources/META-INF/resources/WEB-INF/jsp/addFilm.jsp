@@ -14,14 +14,14 @@
       <table>
         <input type="hidden" name="id" value="${film.id}" />
         <tr>
-            <td><form:label path="title">Film</form:label></td>
+            <td><form:label path="title">Film *</form:label></td>
             <td>
               <input type="text" name="title" value="${film.title}" />
               <form:errors path="title" cssClass="error" /><br />
             </td>
         </tr>
         <tr>
-            <td><form:label path="year">Year</form:label></td>
+            <td><form:label path="year">Year *</form:label></td>
             <td>
               <input type="number" name="year" step="1" value="${film.year}" />
               <form:errors path="year" cssClass="error" /><br />
