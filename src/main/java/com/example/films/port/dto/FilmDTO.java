@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 public class FilmDTO {
     private int id;
 
-    @NotEmpty
+    @NotEmpty(message = "Film release date must not be empty")
     private String releaseDateString;
 
     @NotEmpty(message = "Film title must not be empty")

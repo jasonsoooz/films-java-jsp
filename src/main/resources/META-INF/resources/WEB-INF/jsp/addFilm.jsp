@@ -21,10 +21,10 @@
             </td>
         </tr>
         <tr>
-            <td><form:label path="year">Year *</form:label></td>
+            <td><form:label path="releaseDateString">Release date *</form:label></td>
             <td>
-              <input type="number" name="year" step="1" value="${film.year}" />
-              <form:errors path="year" cssClass="error" /><br />
+              <input type="date" name="releaseDateString" value="${film.releaseDateString}" />
+              <form:errors path="releaseDateString" cssClass="error" /><br />
             </td>
         </tr>
         <tr>

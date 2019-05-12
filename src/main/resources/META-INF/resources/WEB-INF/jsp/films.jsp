@@ -18,7 +18,7 @@
       <tr>
         <th>No</th>
         <th>Film</th>
-        <th>Year</th>
+        <th>Release date</th>
         <th>Imdb rating</th>
         <th>Director</th>
         <th>Action</th>
@@ -27,7 +27,7 @@
         <tr class="notform">
           <td>${film.id}</td>
           <td>${film.title}</td>
-          <td>${film.year}</td>
+          <td>${film.releaseDateString}</td>
           <td>${film.imdbRating}</td>
           <td>${film.director}</td>
           <td>
