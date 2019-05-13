@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +20,7 @@ import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class FilmServiceImplTest {
 
     @Autowired

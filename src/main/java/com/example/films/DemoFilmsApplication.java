@@ -13,6 +13,8 @@ public class DemoFilmsApplication {
 	private static String moreVisible = "*".repeat(25);
 
 	public static void main(String[] args) {
+		System.setProperty("spring.profiles.active", "dev");
+
 		printCommandLineArgs(args);
 		SpringApplication.run(DemoFilmsApplication.class, args);
 	}

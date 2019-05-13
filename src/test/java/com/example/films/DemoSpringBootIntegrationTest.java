@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,6 +33,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @SpringBootTest(classes = DemoFilmsApplication.class, webEnvironment = DEFINED_PORT)
+@ActiveProfiles("dev")
 class DemoSpringBootIntegrationTest {
 
     private static final String HTTP_SERVER_URL = "http://localhost:8015/demo";
